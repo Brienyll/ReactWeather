@@ -13,8 +13,10 @@ getTempCallback('Los Angeles', function(err, temp){
 
 function getTempPromise (location){
   return new Promise(function(resolve, reject){
-    resolve(79);
-    reject('City not found');
+    setTimeout(function(){
+      resolve(79);
+      reject('City not found');
+    }, 1000);
   });
 }
 
