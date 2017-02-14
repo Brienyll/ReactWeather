@@ -24938,10 +24938,24 @@
 	var Weather = React.createClass({
 	  displayName: 'Weather',
 
+	  getInitialState: function getInitialState() {
+	    return {
+	      location: 'Miami',
+	      temp: 88
+	    };
+	  },
 	  handleSearch: function handleSearch(location) {
-	    alert(location);
+	    this.setState({
+	      location: location,
+	      temp: 23
+	    });
 	  },
 	  render: function render() {
+	    var _state = this.state,
+	        temp = _state.temp,
+	        location = _state.location;
+
+
 	    return React.createElement(
 	      'div',
 	      null,
@@ -24951,7 +24965,7 @@
 	        'Weather Component'
 	      ),
 	      React.createElement(WeatherForm, { onSearch: this.handleSearch }),
-	      React.createElement(WeatherMessage, null)
+	      React.createElement(WeatherMessage, { temp: temp, location: location })
 	    );
 	  }
 	});
@@ -24985,7 +24999,7 @@
 	      null,
 	      React.createElement(
 	        'form',
-	        { onSumbit: this.onFormSubmit },
+	        { onSubmit: this.onFormSubmit },
 	        React.createElement('input', { type: 'text', ref: 'location' }),
 	        React.createElement(
 	          'button',
@@ -25011,14 +25025,19 @@
 	  displayName: 'WeatherMessage',
 
 	  render: function render() {
+	    var _props = this.props,
+	        temp = _props.temp,
+	        location = _props.location;
+
+
 	    return React.createElement(
-	      'div',
+	      'h3',
 	      null,
-	      React.createElement(
-	        'h3',
-	        null,
-	        'The weather is'
-	      )
+	      'It\'s ',
+	      temp,
+	      ' in ',
+	      location,
+	      '.'
 	    );
 	  }
 	});
